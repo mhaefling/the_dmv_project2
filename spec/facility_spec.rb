@@ -66,7 +66,7 @@ RSpec.describe Facility do
       expect(@cruz.plate_type).to eq(:regular)
       expect(@facility_1.collected_fees).to eq(100)
     end
-  end
+
     it 'adds two more registered vehicles' do
       @facility_1.add_service('Vehicle Registration')
       @facility_1.register_vehicle(@cruz)
@@ -78,5 +78,13 @@ RSpec.describe Facility do
       expect(@bolt.plate_type).to eq(:ev)
       expect(@facility_1.registered_vehicles).to eq([@cruz, @camaro, @bolt])
       expect(@facility_1.collected_fees).to eq(325)
+    end
+
+    it 'can only register a vehicle if service is offered' do
+      @facility_2.register_vehicle(@bolt)
+      expect(@facility_2.registered_vehicles).to eq([])
+      expect(@facility_2.collected_fees).to eq(0)
+    end
   end
 end
+

@@ -23,20 +23,23 @@ class Facility
   end
 
   def register_vehicle(vehicle)
-    # require 'pry'; binding.pry
-    if vehicle.antique? == true
-      @collected_fees += 25
-      vehicle.plate_type = :antique
-      vehicle.registration_date = Date.today
-    elsif vehicle.electric_vehicle? == true
-      @collected_fees += 200
-      vehicle.plate_type = :ev
-      vehicle.registration_date = Date.today
+    unless services.include?('Vehicle Registration')
+      exit
     else
-      @collected_fees = 100
-      vehicle.plate_type = :regular
-      vehicle.registration_date = Date.today
+      if vehicle.antique? == true
+        @collected_fees += 25
+        vehicle.plate_type = :antique
+        vehicle.registration_date = Date.today
+      elsif vehicle.electric_vehicle? == true
+        @collected_fees += 200
+        vehicle.plate_type = :ev
+        vehicle.registration_date = Date.today
+      else
+        @collected_fees = 100
+        vehicle.plate_type = :regular
+        vehicle.registration_date = Date.today
+      end
     end
-    @registered_vehicles << vehicle
+      @registered_vehicles << vehicle
   end
 end
