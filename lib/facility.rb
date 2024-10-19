@@ -1,4 +1,6 @@
 require 'date'
+require './lib/vehicle'
+require './lib/registrant'
 
 class Facility
   attr_reader :name,
@@ -23,23 +25,47 @@ class Facility
   end
 
   def register_vehicle(vehicle)
-    unless services.include?('Vehicle Registration')
-      exit
+    unless @services.include?('Vehicle Registration')
+      return nil
     else
-      if vehicle.antique? == true
+      if vehicle.antique?
         @collected_fees += 25
-        vehicle.plate_type = :antique
-        vehicle.registration_date = Date.today
-      elsif vehicle.electric_vehicle? == true
+        vehicle.reg_plate_type
+        vehicle.reg_date
+      elsif vehicle.electric_vehicle?
         @collected_fees += 200
-        vehicle.plate_type = :ev
-        vehicle.registration_date = Date.today
+        vehicle.reg_plate_type
+        vehicle.reg_date
       else
         @collected_fees = 100
-        vehicle.plate_type = :regular
-        vehicle.registration_date = Date.today
+        vehicle.reg_plate_type
+        vehicle.reg_date
       end
     end
       @registered_vehicles << vehicle
+  end
+
+  def administer_written_test(registrant)
+    unless @services.include?('Written Test')
+      return false
+    else
+      registrant.take_written_test
+    end
+  end
+
+  def administer_road_test(registrant)
+    unless @services.include?('Road Test')
+      return false
+    else
+      registrant.take_road_test
+    end
+  end
+
+  def renew_drivers_license(registrant)
+    unless @services.include?('Renew License')
+      return false
+    else
+      registrant.renewed_license
+    end
   end
 end

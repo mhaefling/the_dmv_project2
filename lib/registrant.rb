@@ -22,4 +22,28 @@ class Registrant
     def earn_permit
         @permit = true
     end
+
+    def take_written_test
+        if @permit == true && @age >= 16
+            @license_data[:written] = true
+        else
+            false
+        end
+    end
+
+    def take_road_test
+        if @license_data[:written] == true
+            @license_data[:license] = true
+        else
+            false
+        end
+    end
+
+    def renewed_license
+        if @license_data[:license] == true
+            @license_data[:renewed] = true
+        else
+            false
+        end
+    end
 end
