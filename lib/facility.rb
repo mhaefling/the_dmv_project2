@@ -37,7 +37,7 @@ class Facility
         vehicle.reg_plate_type
         vehicle.reg_date
       else
-        @collected_fees = 100
+        @collected_fees += 100
         vehicle.reg_plate_type
         vehicle.reg_date
       end
