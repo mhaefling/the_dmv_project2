@@ -1,14 +1,7 @@
 class VehicleFactory
-    attr_reader :vin,
-                :year,
-                :make,
-                :model,
-                :engine,
-                :registration_date,
-                :plate_type
+    attr_reader :vehicle_instances
 
     def initialize
-
         @vehicle_instances = []
     end
 

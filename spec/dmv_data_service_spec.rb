@@ -23,6 +23,13 @@ RSpec.describe DmvDataService do
     it 'can load washington ev registration data' do
       expect(@dds.wa_ev_registrations.size).to be_an(Integer)
     end
+
+    it 'confirms wa_ev_registrations holds all the json data from api wa_ev_registrations' do
+      wa_ev_registrations = @dds.wa_ev_registrations
+      expect(wa_ev_registrations).to be_an(Array)
+      expect(wa_ev_registrations.sample).to be_an(Hash) 
+      expect(wa_ev_registrations.sample[:vin_1_10]).to be_an(String)
+    end
   end
 
   describe '#co_dmv_office_locations' do
