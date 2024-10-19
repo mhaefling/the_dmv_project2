@@ -74,7 +74,7 @@ RSpec.describe Facility do
     end
 
     it 'can only register a vehicle if service is offered' do
-      @facility_2.register_vehicle(@bolt)
+      expect(@facility_2.register_vehicle(@bolt)).to eq(nil)
       expect(@facility_2.registered_vehicles).to eq([])
       expect(@facility_2.collected_fees).to eq(0)
     end
