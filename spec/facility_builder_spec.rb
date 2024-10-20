@@ -38,6 +38,18 @@ RSpec.describe FacilityBuilder do
             expect(build_facilities.facilities.sample.address).to include("MO")
         end
 
+        it 'confirms that facilities created contain the correct data types' do
+            build_facilities = FacilityBuilder.new
+            co_dmvs = @dds.co_dmv_office_locations
+            build_facilities.create_facilities(co_dmvs)
+            expect(build_facilities.facilities.sample.name).to be_an(String)
+            expect(build_facilities.facilities.sample.phone).to be_an(String)
+            expect(build_facilities.facilities.sample.address).to be_an(String)
+            expect(build_facilities.facilities.sample.services).to be_an(Array)
+            expect(build_facilities.facilities.sample.registered_vehicles).to be_an(Array)
+            expect(build_facilities.facilities.sample.collected_fees).to be_an(Integer)
+        end
+
         it 'includes the right number of facilities co' do
             build_facilities = FacilityBuilder.new
             co_dmvs = @dds.co_dmv_office_locations
@@ -57,13 +69,6 @@ RSpec.describe FacilityBuilder do
             missouri_facilities = @dds.mo_dmv_office_locations
             build_facilities.create_facilities(missouri_facilities)
             expect(build_facilities.facilities.count).to eq(@dds.mo_dmv_office_locations.count)
-        end
-
-        it 'has all the write data types co' do
-            build_facilities = FacilityBuilder.new
-            co_dmvs = @dds.co_dmv_office_locations
-            build_facilities.create_facilities(co_dmvs)
-            expect(build_facilities.facilities.sample.)
         end
     end
 end
