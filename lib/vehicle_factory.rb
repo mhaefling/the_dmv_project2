@@ -29,4 +29,13 @@ class VehicleFactory
         end
         return vehicle_instances
     end
+
+    def most_popular_model(vehicle_data)
+        models = vehicle_instances.map do |vehicle|
+            vehicle.model
+        end
+        unique_models = models.uniq
+        p unique_models
+    end
+    # require 'pry'; binding.pry
 end

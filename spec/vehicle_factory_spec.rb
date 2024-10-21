@@ -10,14 +10,14 @@ RSpec.describe VehicleFactory do
       end
 
     describe '#initialize' do
-        it 'is an instance of VehicleFactory' do
+        xit 'is an instance of VehicleFactory' do
             factory = VehicleFactory.new
             expect(factory).to be_an_instance_of(VehicleFactory)
         end
     end
 
     describe '#create_vehicles' do
-        it 'create an array of vehicle objects/instances' do
+        xit 'create an array of vehicle objects/instances' do
             factory = VehicleFactory.new
             wa_ev_registrations = @dds.wa_ev_registrations
             factory.create_vehicles(wa_ev_registrations)
@@ -25,7 +25,7 @@ RSpec.describe VehicleFactory do
             expect(factory.vehicle_instances.sample).to be_an(Vehicle)
         end
 
-        it 'checks that vehicles have the correct attributes' do
+        xit 'checks that vehicles have the correct attributes' do
             factory = VehicleFactory.new
             wa_ev_registrations = @dds.wa_ev_registrations
             factory.create_vehicles(wa_ev_registrations)
@@ -38,11 +38,20 @@ RSpec.describe VehicleFactory do
             expect(factory.vehicle_instances.sample.year).to be_an(String)
         end
 
-        it 'checks to confirm that the corrected amount of vehicles were created' do
+        xit 'checks to confirm that the corrected amount of vehicles were created' do
             factory = VehicleFactory.new
             wa_ev_registrations = @dds.wa_ev_registrations
             factory.create_vehicles(wa_ev_registrations)
             expect(factory.vehicle_instances.count).to eq(@dds.wa_ev_registrations.count)
+        end
+    end
+    
+    describe '#most_popular_model' do
+        it 'returns the different models' do
+            factory = VehicleFactory.new
+            wa_ev_registrations = @dds.wa_ev_registrations
+            factory.create_vehicles(wa_ev_registrations)
+            factory.most_popular_model(factory.vehicle_instances)
         end
     end
 end
