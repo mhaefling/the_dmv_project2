@@ -35,7 +35,14 @@ class VehicleFactory
             vehicle.model
         end
         unique_models = models.uniq
-        p unique_models
+        popular_model = models.count do |model| model.count
+        require 'pry'; binding.pry
     end
-    # require 'pry'; binding.pry
+
+    def count_model_year(vehicle_year)
+        model_year = vehicle_instances.map do |vehicle|
+            vehicle.year.to_i
+        end
+        total = model_year.count(vehicle_year)
+    end
 end
