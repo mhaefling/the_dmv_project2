@@ -27,22 +27,26 @@ class VehicleFactory
             }
             @vehicle_instances << Vehicle.new(vehicle_details)
         end
-        return vehicle_instances
+        return @vehicle_instances
     end
 
-    def most_popular_model(vehicle_data)
-        models = vehicle_instances.map do |vehicle|
+    def most_popular_model
+        vehicle_models = @vehicle_instances.map do |vehicle|
             vehicle.model
         end
-        unique_models = models.uniq
-        popular_model = models.count do |model| model.count
+        tally_by_model = vehicle_models.tally
+        most_popular = tally_by_model.max_by do |key, value|
+            value
+        end.first
         require 'pry'; binding.pry
     end
 
     def count_model_year(vehicle_year)
-        model_year = vehicle_instances.map do |vehicle|
+        model_year = @vehicle_instances.map do |vehicle|
             vehicle.year.to_i
         end
         total = model_year.count(vehicle_year)
     end
+
+    # def county_with_most_veh(vehicle_data)
 end
