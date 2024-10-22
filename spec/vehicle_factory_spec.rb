@@ -45,4 +45,23 @@ RSpec.describe VehicleFactory do
             expect(factory.vehicle_instances.count).to eq(@dds.wa_ev_registrations.count)
         end
     end
+
+    describe '#most_popular_model' do
+        it 'returns the different models' do
+            factory = VehicleFactory.new
+            wa_ev_registrations = @dds.wa_ev_registrations
+            factory.create_vehicles(wa_ev_registrations)
+            expect(factory.most_popular_model).to eq("Model 3")
+        end
+    end
+
+    describe '#count_model_year' do
+        it 'can count the amount vehicles registered for a specific year' do
+            factory = VehicleFactory.new
+            wa_ev_registrations = @dds.wa_ev_registrations
+            factory.create_vehicles(wa_ev_registrations)
+            expect(factory.count_model_year(2016)).to eq(72)
+            expect(factory.count_model_year(2012)).to eq(18)
+        end
+    end
 end

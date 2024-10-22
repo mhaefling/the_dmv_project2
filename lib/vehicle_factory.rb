@@ -22,11 +22,30 @@ class VehicleFactory
                 make: vehicle[:"make"],
                 model: vehicle[:"model"],
                 engine: :ev,
-                registration_date: vehicle[:"transactoin_date"],
+                registration_date: nil,
                 plate_type: :ev
             }
             @vehicle_instances << Vehicle.new(vehicle_details)
         end
-        return vehicle_instances
+        return @vehicle_instances
+    end
+
+# Method: most_mopular_model used the enumerator .map to create a list of all the different models in the wa ev registration api.
+# It then uses the method .tally to count the number of 
+    def most_popular_model
+        vehicle_models = @vehicle_instances.map do |vehicle|
+            vehicle.model
+        end
+        tally_by_model = vehicle_models.tally
+        most_popular = tally_by_model.max_by do |key, value|
+            value
+        end.first
+    end
+
+    def count_model_year(vehicle_year)
+        model_year = @vehicle_instances.map do |vehicle|
+            vehicle.year.to_i
+        end
+        total = model_year.count(vehicle_year)
     end
 end
